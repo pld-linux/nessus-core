@@ -1,6 +1,4 @@
-#
-# TODO: add gtk client package
-
+# TODO: shared gdchart+gd
 Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
@@ -14,7 +12,6 @@ URL:		http://www.nessus.org/
 BuildRequires:	autoconf
 BuildRequires:	gtk+-devel
 BuildRequires:	libnasl-devel >= 2.0.1
-BuildRequires:	libpcap-devel
 BuildRequires:	libtool
 BuildRequires:	nessus-libs-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -82,6 +79,18 @@ do niej w³amaæ lub jej nadu¿yæ w jaki¶ sposób).
 
 Ten pakiet zawiera klienta Nessusa.
 
+%package -n nessus-client-gtk
+Summary:	Nessus client with GTK GUI
+Summary(pl):	Klient Nessusa z graficznym interfejsem GTK
+Group:		Networking
+Requires:	nessus-client = %{version}
+
+%description -n nessus-client-gtk
+Nessus client with GTK GUI.
+
+%description -n nessus-client-gtk -l pl
+Klient Nessusa z graficznym interfejsem GTK.
+
 %package -n nessus-devel
 Summary:	Header files for Nessus plugins development
 Summary(pl):	Pliki nag³ówkowe do tworzenia wtyczek Nesussa
@@ -101,15 +110,30 @@ Pliki nag³ówkowe do tworzenia wtyczek Nesussa.
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
-%configure
+%configure \
+	--enable-gtk
 
 %{__make}
+
+mv -f nessus/nessus nessus-gtk
+
+%{__make} -C nessus clean
+sed -e 's@^#define USE_GTK 1@/* #undef USE_GTK */@' include/config.h > config.tmp
+mv -f config.tmp include/config.h
+%{__make} -C nessus \
+	GTKLIBS= \
+	GTKCONFIG_CFLAGS= \
+	GLIBCONFIG_CFLAGS= \
+	X_LIBS= \
+	USE_GTK=
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+install nessus-gtk $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -126,7 +150,12 @@ rm -rf $RPM_BUILD_ROOT
 %files -n nessus-client
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
+%exclude %{_bindir}/nessus-gtk
 %{_mandir}/man1/*
+
+%files -n nessus-client-gtk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/nessus-gtk
 
 %files -n nessus-devel
 %defattr(644,root,root,755)
