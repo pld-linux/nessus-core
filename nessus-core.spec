@@ -11,6 +11,7 @@ Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version
 Source1:	nessusd.init
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	gtk+-devel
 BuildRequires:	libnasl-devel >= 2.0.1
 BuildRequires:	libtool
