@@ -17,6 +17,7 @@ BuildRequires:	libtool
 BuildRequires:	nessus-libs-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# keep in sync with nessus-libs!
 %define		_localstatedir		/var/lib
 
 %description
@@ -131,6 +132,7 @@ mv -f config.tmp include/config.h
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_localstatedir}/nessus/logs
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -163,6 +165,7 @@ fi
 %{_mandir}/man8/*
 %{_libdir}/nessus
 %{_sysconfdir}/nessus
+%dir %{_localstatedir}/nessus/logs
 
 %files -n nessus-client
 %defattr(644,root,root,755)
