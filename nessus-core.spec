@@ -1,4 +1,6 @@
-# TODO: shared gdchart+gd
+# TODO:
+# - shared gdchart+gd
+# - SECURITY: http://securitytracker.com/alerts/2004/Jul/1010758.html
 Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
