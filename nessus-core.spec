@@ -4,12 +4,11 @@
 Summary:	Nessus-core
 Summary(pl):	Nessus-rdzeñ
 Name:		nessus-core
-Version:	2.0.3
+Version:	2.0.4
 Release:	0.1
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
-Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
 BuildRequires:	libtool
@@ -51,7 +50,6 @@ Group:		Networking
 
 %prep
 %setup -q -n %{name}
-#%patch0 -p1
 
 %build
 %{__libtoolize}
