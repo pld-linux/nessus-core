@@ -12,10 +12,11 @@ Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version
 #Source0-md5:	2dd997d65d1785526fe9d87393ce0417
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
+BuildRequires:	gtk+-devel
+BuildRequires:	libnasl-devel >= 2.0.1
+BuildRequires:	libpcap-devel
 BuildRequires:	libtool
 BuildRequires:	nessus-libs-devel
-BuildRequires:	libnasl-devel >= 2.0.1
-BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_localstatedir		/var/lib
