@@ -1,15 +1,14 @@
 # TODO:
 # - shared gdchart+gd
-# - SECURITY: http://securitytracker.com/alerts/2004/Jul/1010758.html
 Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
-Version:	2.0.10a
+Version:	2.0.12
 Release:	1
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
-# Source0-md5:	bd9d62375adc5d6b9e38879a8cee108d
+# Source0-md5:	23017718a25848d3629e57ea2b72a421
 Source1:	nessusd.init
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
