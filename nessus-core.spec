@@ -4,7 +4,7 @@
 Summary:	Nessus-core
 Summary(pl):	Nessus-rdzeñ
 Name:		nessus-core
-Version:	2.0.1
+Version:	2.0.3
 Release:	1
 License:	GPL
 Group:		Networking
