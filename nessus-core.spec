@@ -4,7 +4,7 @@
 Summary:	Nessus-core
 Summary(pl):	Nessus-rdzeñ
 Name:		nessus-core
-Version:	2.0.0
+Version:	2.0.1
 Release:	1
 License:	GPL
 Group:		Networking
@@ -13,8 +13,9 @@ Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
 BuildRequires:	libtool
-BuildRequires:	nessus-libs
-#BuildRequires:	gtk+-devel
+BuildRequires:	nessus-libs-devel
+BuildRequires:	libnasl-devel >= 2.0.1
+BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_localstatedir		/var/lib
@@ -53,11 +54,10 @@ Group:		Networking
 #%patch0 -p1
 
 %build
-aclocal
+%{__libtoolize}
+%{__aclocal}
 %{__autoconf}
-%configure \
-	--disable-gtk \
-	--without-x
+%configure
 %{__make}
 
 %install
