@@ -4,7 +4,7 @@
 Summary:	Nessus-core
 Summary(pl):	Nessus-rdzeñ
 Name:		nessus-core
-Version:	1.2.5
+Version:	2.0.0
 Release:	1
 License:	GPL
 Group:		Networking
@@ -49,7 +49,7 @@ Group:		Networking
 
 %prep
 %setup -q -n %{name}
-%patch0 -p1
+#%patch0 -p1
 
 %build
 aclocal
