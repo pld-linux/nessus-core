@@ -2,12 +2,12 @@
 Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
-Version:	2.0.8
-Release:	0.1
+Version:	2.0.10a
+Release:	1
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
-# Source0-md5:	ba8e9cdf30a1a527159a621cea4772f3
+# Source0-md5:	bd9d62375adc5d6b9e38879a8cee108d
 Source1:	nessusd.init
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
@@ -15,7 +15,7 @@ BuildRequires:	automake
 BuildRequires:	gtk+-devel
 BuildRequires:	libnasl-devel >= 2.0.1
 BuildRequires:	libtool
-BuildRequires:	nessus-libs-devel
+BuildRequires:	nessus-libs-devel >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # keep in sync with nessus-libs!
@@ -42,7 +42,7 @@ Ten pakiet zawiera podstawow± czê¶æ Nessusa.
 Summary:	Nessus daemon
 Summary(pl):	Demon Nessusa
 Group:		Networking
-Requires:	nessus-libs >= 2.0.8-2
+Requires:	nessus-libs >= %{version}
 
 %description -n nessusd
 The "Nessus" Project aims to provide to the Internet community a free,
@@ -87,7 +87,7 @@ Ten pakiet zawiera klienta Nessusa.
 Summary:	Nessus client with GTK GUI
 Summary(pl):	Klient Nessusa z graficznym interfejsem GTK
 Group:		Networking
-Requires:	nessus-client = %{version}
+Requires:	nessus-client = %{version}-%{release}
 
 %description -n nessus-client-gtk
 Nessus client with GTK GUI.
@@ -99,7 +99,7 @@ Klient Nessusa z graficznym interfejsem GTK.
 Summary:	Header files for Nessus plugins development
 Summary(pl):	Pliki nag³ówkowe do tworzenia wtyczek Nesussa
 Group:		Networking
-Requires:	nessus-libs-devel
+Requires:	nessus-libs-devel >= %{version}
 
 %description -n nessus-devel
 Header files for Nessus plugins development.
