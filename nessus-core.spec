@@ -13,6 +13,7 @@ Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
 BuildRequires:	libtool
+BuildRequires:	nessus-libs
 #BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
