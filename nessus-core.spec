@@ -85,16 +85,16 @@ do niej w³amaæ lub jej nadu¿yæ w jaki¶ sposób).
 Ten pakiet zawiera klienta Nessusa.
 
 %package -n nessus-client-gtk
-Summary:	Nessus client with GTK GUI
-Summary(pl):	Klient Nessusa z graficznym interfejsem GTK
+Summary:	Nessus client with GTK+ GUI
+Summary(pl):	Klient Nessusa z graficznym interfejsem GTK+
 Group:		Networking
 Requires:	nessus-client = %{version}-%{release}
 
 %description -n nessus-client-gtk
-Nessus client with GTK GUI.
+Nessus client with GTK+ GUI.
 
 %description -n nessus-client-gtk -l pl
-Klient Nessusa z graficznym interfejsem GTK.
+Klient Nessusa z graficznym interfejsem GTK+.
 
 %package -n nessus-devel
 Summary:	Header files for Nessus plugins development
