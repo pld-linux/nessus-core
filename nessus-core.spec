@@ -3,20 +3,21 @@
 Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
-Version:	2.0.12
+Version:	2.2.2a
 Release:	1
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
-# Source0-md5:	23017718a25848d3629e57ea2b72a421
+# Source0-md5:	c307b37336921462fb21ca09aca407ca
 Source1:	nessusd.init
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gtk+-devel
-BuildRequires:	libnasl-devel >= 2.0.1
+BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	libnasl-devel >= %{version}
 BuildRequires:	libtool
 BuildRequires:	nessus-libs-devel >= %{version}
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # keep in sync with nessus-libs!
@@ -43,6 +44,7 @@ Ten pakiet zawiera podstawow± czê¶æ Nessusa.
 Summary:	Nessus daemon
 Summary(pl):	Demon Nessusa
 Group:		Networking
+Requires:	libnasl >= %{version}
 Requires:	nessus-libs >= %{version}
 
 %description -n nessusd
