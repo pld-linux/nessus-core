@@ -2,12 +2,12 @@
 Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
-Version:	2.0.7
-Release:	1
+Version:	2.0.8
+Release:	0.1
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
-# Source0-md5:	d9e214bbdd93f5ce1376897d96e7b859
+# Source0-md5:	ba8e9cdf30a1a527159a621cea4772f3
 Source1:	nessusd.init
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
@@ -157,14 +157,14 @@ fi
 
 %files -n nessusd
 %defattr(644,root,root,755)
-%doc CHANGES README_SSL TODO doc/{*.txt,Top20*,WARNING.En,nsr.dtd,unbsp.c,ntp}
+%doc CHANGES README_SSL TODO doc/{*.txt,Top20*,WARNING.En,nsr.dtd,ntp}
 %attr(755,root,root) %{_sbindir}/*
 %attr(754,root,root) /etc/rc.d/init.d/nessusd
 %{_mandir}/man8/*
 %{_libdir}/nessus
 %{_sysconfdir}/nessus
 %{_localstatedir}/nessus
-%dir /var/nessus
+#%dir /var/nessus
 
 %files -n nessus-client
 %defattr(644,root,root,755)
