@@ -40,6 +40,7 @@ Ten pakiet zawiera podstawow± czê¶æ Nessusa.
 Summary:	Nessus daemon
 Summary(pl):	Demon Nessusa
 Group:		Networking
+Requires:	nessus-libs >= 2.0.8-2
 
 %description -n nessusd
 The "Nessus" Project aims to provide to the Internet community a free,
@@ -134,7 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
+install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 install nessus-gtk $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/nessusd
 
@@ -152,7 +153,6 @@ if [ "$1" = "0" ]; then
 		/etc/rc.d/init.d/nessusd stop >&2
 	fi
 	/sbin/chkconfig --del nessusd
-	rm -f /var/nessus/*
 fi
 
 %files -n nessusd
@@ -163,8 +163,6 @@ fi
 %{_mandir}/man8/*
 %{_libdir}/nessus
 %{_sysconfdir}/nessus
-%{_localstatedir}/nessus
-#%dir /var/nessus
 
 %files -n nessus-client
 %defattr(644,root,root,755)
