@@ -1,3 +1,6 @@
+#
+# TODO: add gtk client package
+
 Summary:	Nessus-core
 Summary(pl):	Nessus-rdzeñ
 Name:		nessus-core
@@ -10,7 +13,7 @@ Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
 BuildRequires:	libtool
-BuildRequires:	gtk+-devel
+#BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_localstatedir		/var/lib
@@ -35,6 +38,15 @@ Group:		Networking
 
 %description -n nessus-client -l pl
 
+%package -n nessus-devel
+Summary:	-
+Summary(pl):	-
+Group:		Networking
+
+%description -n nessus-devel
+
+%description -n nessus-devel -l pl
+
 %prep
 %setup -q -n %{name}
 %patch0 -p1
@@ -42,7 +54,9 @@ Group:		Networking
 %build
 aclocal
 %{__autoconf}
-%configure
+%configure \
+	--disable-gtk \
+	--without-x
 %{__make}
 
 %install
@@ -50,7 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
-rm -f $RPM_BUILD_ROOT%{_includedir}/nessus/includes.h
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,9 +76,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nessus
 %{_sysconfdir}/nessus
 %{_localstatedir}/nessus
-%{_includedir}/nessus/*
 
 %files -n nessus-client
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
+
+%files -n nessus-devel
+%defattr(644,root,root,755)
+%{_includedir}/nessus/*
+%exclude %{_includedir}/nessus/includes.h
