@@ -5,14 +5,13 @@
 # chkconfig:	2345 92 12
 # description:	Starts and stops the Nessus daemon
 
+. /etc/rc.d/init.d/functions
 
 if [ ! -f /etc/nessus/nessusd.conf ]; then
 	nls "Error: /etc/nessus/nessusd.conf not found"
 	nls " Nessus daemon can't be run."
 	exit 1
 fi
-
-. /etc/rc.d/init.d/functions
 
 # Get service config
 if [ -f /etc/sysconfig/nessusd ]; then
