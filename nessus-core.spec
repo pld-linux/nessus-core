@@ -148,10 +148,10 @@ echo "don't forget about /etc/nessus/nessusd.conf file!"
 
 %preun -n nessusd
 if [ "$1" = "0" ]; then
-        if [ -f /var/lock/subsys/nessusd ]; then
-                /etc/rc.d/init.d/nessusd stop >&2
-        fi
-        /sbin/chkconfig --del nessusd
+	if [ -f /var/lock/subsys/nessusd ]; then
+		/etc/rc.d/init.d/nessusd stop >&2
+	fi
+	/sbin/chkconfig --del nessusd
 fi
 
 %files -n nessusd
