@@ -152,6 +152,7 @@ if [ "$1" = "0" ]; then
 		/etc/rc.d/init.d/nessusd stop >&2
 	fi
 	/sbin/chkconfig --del nessusd
+	rm -f /var/nessus/*
 fi
 
 %files -n nessusd
@@ -163,6 +164,7 @@ fi
 %{_libdir}/nessus
 %{_sysconfdir}/nessus
 %{_localstatedir}/nessus
+%dir /var/nessus
 
 %files -n nessus-client
 %defattr(644,root,root,755)
