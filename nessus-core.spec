@@ -2,12 +2,13 @@
 Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
-Version:	2.0.6a
-Release:	0.1
+Version:	2.0.7
+Release:	1
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
-#Source0-md5:	2dd997d65d1785526fe9d87393ce0417
+# Source0-md5:	d9e214bbdd93f5ce1376897d96e7b859
+Source1:	nessusd.init
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
 BuildRequires:	gtk+-devel
@@ -133,15 +134,31 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
 install nessus-gtk $RPM_BUILD_ROOT%{_bindir}
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/nessusd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post -n nessusd
+echo "Run \"/sbin/chkconfig --add nessusd\" to activate nessus daemon."
+echo "then run \"/etc/rc.d/init.d/nessusd start\" to start nessus daemon."
+echo "don't forget about /etc/nessus/nessusd.conf file!"
+
+%preun -n nessusd
+if [ "$1" = "0" ]; then
+        if [ -f /var/lock/subsys/nessusd ]; then
+                /etc/rc.d/init.d/nessusd stop >&2
+        fi
+        /sbin/chkconfig --del nessusd
+fi
 
 %files -n nessusd
 %defattr(644,root,root,755)
 %doc CHANGES README_SSL TODO doc/{*.txt,Top20*,WARNING.En,nsr.dtd,unbsp.c,ntp}
 %attr(755,root,root) %{_sbindir}/*
+%attr(754,root,root) /etc/rc.d/init.d/nessusd
 %{_mandir}/man8/*
 %{_libdir}/nessus
 %{_sysconfdir}/nessus
