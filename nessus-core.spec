@@ -152,6 +152,7 @@ rm -rf $RPM_BUILD_ROOT
 echo "Run \"/sbin/chkconfig --add nessusd\" to activate nessus daemon."
 echo "then run \"/etc/rc.d/init.d/nessusd start\" to start nessus daemon."
 echo "don't forget about /etc/nessus/nessusd.conf file!"
+echo "Note that if you don't have a nessusd.conf file, nessusd will create one for you!"
 
 %preun -n nessusd
 if [ "$1" = "0" ]; then
