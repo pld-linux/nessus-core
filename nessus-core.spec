@@ -1,5 +1,7 @@
 # TODO:
 # - shared gdchart+gd
+# - 17 3 * * * /usr/local/sbin/nessus-update-plugins in cron (register)
+# - register banner
 Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
@@ -119,6 +121,11 @@ Pliki nag³ówkowe do tworzenia wtyczek Nesussa.
 %{__autoconf}
 %configure \
 	--enable-gtk
+#--enable-syslog         log messages via syslog()
+#--enable-tcpwrappers    use the libwrap.a library
+#--enable-unix-socket=/path    use a unix socket for client server communication
+#--enable-release        set the compiler flags to -O
+#--with-x                use the X Window System
 
 %{__make}
 
@@ -144,6 +151,7 @@ install -d $RPM_BUILD_ROOT%{_localstatedir}/nessus/logs
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 install nessus-gtk $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/nessusd
+install nessus-services $RPM_BUILD_ROOT%{_localstatedir}/nessus/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -169,6 +177,7 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/nessusd
 %{_mandir}/man8/*
 %{_libdir}/nessus
+%{_localstatedir}/nessus/nessus-services
 %{_sysconfdir}/nessus
 %dir %{_localstatedir}/nessus/logs
 
