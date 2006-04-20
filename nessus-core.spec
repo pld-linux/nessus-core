@@ -20,6 +20,7 @@ BuildRequires:	libnasl-devel >= %{version}
 BuildRequires:	libtool
 BuildRequires:	nessus-libs-devel >= %{version}
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # keep in sync with nessus-libs!
@@ -46,8 +47,10 @@ Ten pakiet zawiera podstawow± czê¶æ Nessusa.
 Summary:	Nessus daemon
 Summary(pl):	Demon Nessusa
 Group:		Networking
+Requires(post,preun):	/sbin/chkconfig
 Requires:	libnasl >= %{version}
 Requires:	nessus-libs >= %{version}
+Requires:	rc-scripts
 
 %description -n nessusd
 The "Nessus" Project aims to provide to the Internet community a free,
@@ -121,11 +124,11 @@ Pliki nag³ówkowe do tworzenia wtyczek Nesussa.
 %{__autoconf}
 %configure \
 	--enable-gtk
-#--enable-syslog         log messages via syslog()
-#--enable-tcpwrappers    use the libwrap.a library
-#--enable-unix-socket=/path    use a unix socket for client server communication
-#--enable-release        set the compiler flags to -O
-#--with-x                use the X Window System
+#--enable-syslog		 log messages via syslog()
+#--enable-tcpwrappers	use the libwrap.a library
+#--enable-unix-socket=/path	use a unix socket for client server communication
+#--enable-release		set the compiler flags to -O
+#--with-x				use the X Window System
 
 %{__make}
 
@@ -157,16 +160,16 @@ install nessus-services $RPM_BUILD_ROOT%{_localstatedir}/nessus/
 rm -rf $RPM_BUILD_ROOT
 
 %post -n nessusd
-echo "Run \"/sbin/chkconfig --add nessusd\" to activate nessus daemon."
-echo "then run \"/etc/rc.d/init.d/nessusd start\" to start nessus daemon."
-echo "don't forget about /etc/nessus/nessusd.conf file!"
-echo "Note that if you don't have a nessusd.conf file, nessusd will create one for you!"
+/sbin/chkconfig --add nessusd
+%service nessusd restart "nessus daemon"
+if [ "$1" = 1 ]; then
+	echo "Don't forget about %{_sysconfdir}/nessus/nessusd.conf file!"
+	echo "Note that if you don't have a nessusd.conf file, nessusd will create one for you!"
+fi
 
 %preun -n nessusd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/nessusd ]; then
-		/etc/rc.d/init.d/nessusd stop >&2
-	fi
+	%service nessusd stop
 	/sbin/chkconfig --del nessusd
 fi
 
