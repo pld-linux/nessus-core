@@ -3,7 +3,7 @@
 # - 17 3 * * * /usr/local/sbin/nessus-update-plugins in cron (register)
 # - register banner
 Summary:	Nessus core package
-Summary(pl):	G≥Ûwny pakiet Nessusa
+Summary(pl.UTF-8):   G≈Ç√≥wny pakiet Nessusa
 Name:		nessus-core
 Version:	2.2.7
 Release:	1
@@ -34,18 +34,18 @@ whether bad guys may break into it, or misuse it in some way).
 
 This package contains core part of Nessus.
 
-%description -l pl
-Celem projektu "Nessus" jest dostarczenie spo≥eczno∂ci internetowej
-wolnodostÍpnego, potÍønego, aktualnego i ≥atwego w uøyciu zdalnego
-skanera bezpieczeÒstwa (tzn. oprogramowania, ktÛre zdalnie
-przeprowadza audyt podanej sieci i sprawdza, czy ºli ludzie mog± siÍ
-do niej w≥amaÊ lub jej naduøyÊ w jaki∂ sposÛb).
+%description -l pl.UTF-8
+Celem projektu "Nessus" jest dostarczenie spo≈Çeczno≈õci internetowej
+wolnodostƒôpnego, potƒô≈ºnego, aktualnego i ≈Çatwego w u≈ºyciu zdalnego
+skanera bezpiecze≈Ñstwa (tzn. oprogramowania, kt√≥re zdalnie
+przeprowadza audyt podanej sieci i sprawdza, czy ≈∫li ludzie mogƒÖ siƒô
+do niej w≈Çamaƒá lub jej nadu≈ºyƒá w jaki≈õ spos√≥b).
 
-Ten pakiet zawiera podstawow± czÍ∂Ê Nessusa.
+Ten pakiet zawiera podstawowƒÖ czƒô≈õƒá Nessusa.
 
 %package -n nessusd
 Summary:	Nessus daemon
-Summary(pl):	Demon Nessusa
+Summary(pl.UTF-8):   Demon Nessusa
 Group:		Networking
 Requires(post,preun):	/sbin/chkconfig
 Requires:	libnasl >= %{version}
@@ -60,18 +60,18 @@ whether bad guys may break into it, or misuse it in some way).
 
 This package contains the Nessus daemon.
 
-%description -n nessusd -l pl
-Celem projektu "Nessus" jest dostarczenie spo≥eczno∂ci internetowej
-wolnodostÍpnego, potÍønego, aktualnego i ≥atwego w uøyciu zdalnego
-skanera bezpieczeÒstwa (tzn. oprogramowania, ktÛre zdalnie
-przeprowadza audyt podanej sieci i sprawdza, czy ºli ludzie mog± siÍ
-do niej w≥amaÊ lub jej naduøyÊ w jaki∂ sposÛb).
+%description -n nessusd -l pl.UTF-8
+Celem projektu "Nessus" jest dostarczenie spo≈Çeczno≈õci internetowej
+wolnodostƒôpnego, potƒô≈ºnego, aktualnego i ≈Çatwego w u≈ºyciu zdalnego
+skanera bezpiecze≈Ñstwa (tzn. oprogramowania, kt√≥re zdalnie
+przeprowadza audyt podanej sieci i sprawdza, czy ≈∫li ludzie mogƒÖ siƒô
+do niej w≈Çamaƒá lub jej nadu≈ºyƒá w jaki≈õ spos√≥b).
 
 Ten pakiet zawiera demona Nessusa.
 
 %package -n nessus-client
 Summary:	Nessus client
-Summary(pl):	Klient nessusa
+Summary(pl.UTF-8):   Klient nessusa
 Group:		Networking
 
 %description -n nessus-client
@@ -82,38 +82,38 @@ whether bad guys may break into it, or misuse it in some way).
 
 This package contains the Nessus client.
 
-%description -n nessus-client -l pl
-Celem projektu "Nessus" jest dostarczenie spo≥eczno∂ci internetowej
-wolnodostÍpnego, potÍønego, aktualnego i ≥atwego w uøyciu zdalnego
-skanera bezpieczeÒstwa (tzn. oprogramowania, ktÛre zdalnie
-przeprowadza audyt podanej sieci i sprawdza, czy ºli ludzie mog± siÍ
-do niej w≥amaÊ lub jej naduøyÊ w jaki∂ sposÛb).
+%description -n nessus-client -l pl.UTF-8
+Celem projektu "Nessus" jest dostarczenie spo≈Çeczno≈õci internetowej
+wolnodostƒôpnego, potƒô≈ºnego, aktualnego i ≈Çatwego w u≈ºyciu zdalnego
+skanera bezpiecze≈Ñstwa (tzn. oprogramowania, kt√≥re zdalnie
+przeprowadza audyt podanej sieci i sprawdza, czy ≈∫li ludzie mogƒÖ siƒô
+do niej w≈Çamaƒá lub jej nadu≈ºyƒá w jaki≈õ spos√≥b).
 
 Ten pakiet zawiera klienta Nessusa.
 
 %package -n nessus-client-gtk
 Summary:	Nessus client with GTK+ GUI
-Summary(pl):	Klient Nessusa z graficznym interfejsem GTK+
+Summary(pl.UTF-8):   Klient Nessusa z graficznym interfejsem GTK+
 Group:		Networking
 Requires:	nessus-client = %{version}-%{release}
 
 %description -n nessus-client-gtk
 Nessus client with GTK+ GUI.
 
-%description -n nessus-client-gtk -l pl
+%description -n nessus-client-gtk -l pl.UTF-8
 Klient Nessusa z graficznym interfejsem GTK+.
 
 %package -n nessus-devel
 Summary:	Header files for Nessus plugins development
-Summary(pl):	Pliki nag≥Ûwkowe do tworzenia wtyczek Nesussa
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe do tworzenia wtyczek Nesussa
 Group:		Networking
 Requires:	nessus-libs-devel >= %{version}
 
 %description -n nessus-devel
 Header files for Nessus plugins development.
 
-%description -n nessus-devel -l pl
-Pliki nag≥Ûwkowe do tworzenia wtyczek Nesussa.
+%description -n nessus-devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe do tworzenia wtyczek Nesussa.
 
 %prep
 %setup -q -n %{name}
