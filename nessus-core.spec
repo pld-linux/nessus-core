@@ -3,7 +3,7 @@
 # - 17 3 * * * /usr/local/sbin/nessus-update-plugins in cron (register)
 # - register banner
 Summary:	Nessus core package
-Summary(pl.UTF-8):   Główny pakiet Nessusa
+Summary(pl.UTF-8):	Główny pakiet Nessusa
 Name:		nessus-core
 Version:	2.2.7
 Release:	1
@@ -45,7 +45,7 @@ Ten pakiet zawiera podstawową część Nessusa.
 
 %package -n nessusd
 Summary:	Nessus daemon
-Summary(pl.UTF-8):   Demon Nessusa
+Summary(pl.UTF-8):	Demon Nessusa
 Group:		Networking
 Requires(post,preun):	/sbin/chkconfig
 Requires:	libnasl >= %{version}
@@ -71,7 +71,7 @@ Ten pakiet zawiera demona Nessusa.
 
 %package -n nessus-client
 Summary:	Nessus client
-Summary(pl.UTF-8):   Klient nessusa
+Summary(pl.UTF-8):	Klient nessusa
 Group:		Networking
 
 %description -n nessus-client
@@ -93,7 +93,7 @@ Ten pakiet zawiera klienta Nessusa.
 
 %package -n nessus-client-gtk
 Summary:	Nessus client with GTK+ GUI
-Summary(pl.UTF-8):   Klient Nessusa z graficznym interfejsem GTK+
+Summary(pl.UTF-8):	Klient Nessusa z graficznym interfejsem GTK+
 Group:		Networking
 Requires:	nessus-client = %{version}-%{release}
 
@@ -105,7 +105,7 @@ Klient Nessusa z graficznym interfejsem GTK+.
 
 %package -n nessus-devel
 Summary:	Header files for Nessus plugins development
-Summary(pl.UTF-8):   Pliki nagłówkowe do tworzenia wtyczek Nesussa
+Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia wtyczek Nesussa
 Group:		Networking
 Requires:	nessus-libs-devel >= %{version}
 
