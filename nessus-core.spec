@@ -4,7 +4,7 @@ Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
 Version:	2.2.4
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
@@ -183,5 +183,6 @@ fi
 
 %files -n nessus-devel
 %defattr(644,root,root,755)
+%dir %{_includedir}/nessus
 %{_includedir}/nessus/*
 %exclude %{_includedir}/nessus/includes.h
