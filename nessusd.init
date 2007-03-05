@@ -1,0 +1,65 @@
+#!/bin/sh
+#
+# nessusd:	Starts and stops the Nessus daemon
+#
+# chkconfig:	2345 92 12
+# description:	Starts and stops the Nessus daemon
+
+. /etc/rc.d/init.d/functions
+
+if [ ! -f /etc/nessus/nessusd.conf ]; then
+	nls "Error: %s not found" /etc/nessus/nessusd.conf
+	nls " Nessus daemon can't be run."
+	exit 1
+fi
+
+# Get service config
+if [ -f /etc/sysconfig/nessusd ]; then
+	. /etc/sysconfig/nessusd
+fi
+
+start() {
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/nessusd ]; then
+		msg_starting "Nessus Daemon"
+		daemon /usr/sbin/nessusd -D
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/nessusd
+	else
+		msg_already_running "Nessus Daemon"
+	fi
+}
+
+stop() {
+	if [ -f /var/lock/subsys/nessusd ]; then
+		msg_stopping "Nessus Daemon"
+		killproc nessusd
+		rm -f /var/lock/subsys/nessusd
+	else
+		msg_not_running "Nessus Daemon"
+	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  status)
+	status nessusd
+	exit $?
+	;;
+  restart|force-reload)
+	stop
+	start
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
