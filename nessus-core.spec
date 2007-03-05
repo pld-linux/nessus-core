@@ -4,7 +4,7 @@ Summary:	Nessus core package
 Summary(pl):	G³ówny pakiet Nessusa
 Name:		nessus-core
 Version:	2.2.4
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
@@ -18,6 +18,7 @@ BuildRequires:	libnasl-devel >= %{version}
 BuildRequires:	libtool
 BuildRequires:	nessus-libs-devel >= %{version}
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # keep in sync with nessus-libs!
@@ -44,8 +45,10 @@ Ten pakiet zawiera podstawow± czê¶æ Nessusa.
 Summary:	Nessus daemon
 Summary(pl):	Demon Nessusa
 Group:		Networking
+Requires(post,preun):	/sbin/chkconfig
 Requires:	libnasl >= %{version}
 Requires:	nessus-libs >= %{version}
+Requires:	rc-scripts
 
 %description -n nessusd
 The "Nessus" Project aims to provide to the Internet community a free,
@@ -149,15 +152,16 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/nessusd
 rm -rf $RPM_BUILD_ROOT
 
 %post -n nessusd
-echo "Run \"/sbin/chkconfig --add nessusd\" to activate nessus daemon."
-echo "then run \"/etc/rc.d/init.d/nessusd start\" to start nessus daemon."
-echo "don't forget about /etc/nessus/nessusd.conf file!"
+/sbin/chkconfig --add nessusd
+%service nessusd restart "nessus daemon"
+if [ "$1" = 1 ]; then
+	echo "Don't forget about %{_sysconfdir}/nessus/nessusd.conf file!"
+	echo "Note that if you don't have a nessusd.conf file, nessusd will create one for you!"
+fi
 
 %preun -n nessusd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/nessusd ]; then
-		/etc/rc.d/init.d/nessusd stop >&2
-	fi
+	%service nessusd stop
 	/sbin/chkconfig --del nessusd
 fi
 
