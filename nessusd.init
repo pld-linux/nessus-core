@@ -18,10 +18,7 @@ if [ -f /etc/sysconfig/nessusd ]; then
 	. /etc/sysconfig/nessusd
 fi
 
-RETVAL=0
-# See how we were called.
-case "$1" in
-  start)
+start() {
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/nessusd ]; then
 		msg_starting "Nessus Daemon"
@@ -31,8 +28,9 @@ case "$1" in
 	else
 		msg_already_running "Nessus Daemon"
 	fi
-	;;
-  stop)
+}
+
+stop() {
 	if [ -f /var/lock/subsys/nessusd ]; then
 		msg_stopping "Nessus Daemon"
 		killproc nessusd
@@ -40,15 +38,24 @@ case "$1" in
 	else
 		msg_not_running "Nessus Daemon"
 	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
 	;;
   status)
 	status nessusd
 	exit $?
 	;;
   restart|force-reload)
-	$0 stop
-	$0 start
-	exit $?
+	stop
+	start
 	;;
   *)
 	msg_usage "$0 {start|stop|restart|force-reload|status}"
