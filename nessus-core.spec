@@ -196,5 +196,6 @@ fi
 
 %files -n nessus-devel
 %defattr(644,root,root,755)
+%dir %{_includedir}/nessus
 %{_includedir}/nessus/*
 %exclude %{_includedir}/nessus/includes.h
