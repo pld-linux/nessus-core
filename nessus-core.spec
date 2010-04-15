@@ -130,7 +130,7 @@ Pliki nagłówkowe do tworzenia wtyczek Nesussa.
 #--enable-release		set the compiler flags to -O
 #--with-x				use the X Window System
 
-%{__make}
+%{__make} -j1
 
 mv -f nessus/nessus nessus-gtk
 
