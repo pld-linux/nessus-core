@@ -6,7 +6,7 @@ Summary:	Nessus core package
 Summary(pl.UTF-8):	Główny pakiet Nessusa
 Name:		nessus-core
 Version:	2.2.7
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.nessus.org/pub/nessus/nessus-%{version}/src/%{name}-%{version}.tar.gz
