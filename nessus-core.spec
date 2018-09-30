@@ -13,6 +13,7 @@ Group:		Networking
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	b778c4c8e0eee912c7d62b80de920ef4
 Source1:	nessusd.init
+Patch0:		build.patch
 URL:		http://www.nessus.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -118,6 +119,7 @@ Pliki nagłówkowe do tworzenia wtyczek Nesussa.
 
 %prep
 %setup -q -n %{name}
+%patch0 -p1
 
 %build
 %{__libtoolize}

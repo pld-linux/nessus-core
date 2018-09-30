@@ -1,0 +1,72 @@
+diff -urp nessus-core.org/nessus/nessus.c nessus-core/nessus/nessus.c
+--- nessus-core.org/nessus/nessus.c	2008-03-12 09:09:38.000000000 +0100
++++ nessus-core/nessus/nessus.c	2018-09-30 14:11:53.232012115 +0200
+@@ -438,11 +438,7 @@ Please launch nessus-mkrand(1) first !")
+ 	}
+       if (ssl_mt == NULL)
+ 	{
+-	  if (strcasecmp(ssl_ver, "SSLv2") == 0)
+-	    ssl_mt = SSLv2_client_method();
+-	  else if (strcasecmp(ssl_ver, "SSLv3") == 0)
+-	    ssl_mt = SSLv3_client_method();
+-	  else if (strcasecmp(ssl_ver, "SSLv23") == 0)
++	  if (strcasecmp(ssl_ver, "SSLv23") == 0)
+ 	    ssl_mt = SSLv23_client_method();
+ 	  else if (strcasecmp(ssl_ver, "TLSv1") == 0)
+ 	    ssl_mt = TLSv1_client_method();
+@@ -565,23 +561,22 @@ Please launch nessus-mkrand(1) first !")
+       if (DontCheckServerCert == 0 && (paranoia_level == 1 || paranoia_level == 3))
+ 	{
+ 	  X509	*cert = SSL_get_peer_certificate(ssl);
+-	  unsigned char	stored_hash[SHA_DIGEST_LENGTH];
++	  unsigned char	stored_hash[SHA_DIGEST_LENGTH], sha1_hash[SHA_DIGEST_LENGTH];
+       
+ 	  if (get_server_cert_hash(hostname, stored_hash) <= 0)
+ 	    memset(stored_hash, 0, sizeof(stored_hash));
+ 
+-	  if(cert == NULL)
++	  if(cert == NULL || !X509_digest(cert, EVP_sha1(), sha1_hash, NULL))
+ 	    {
+ 	      sslerror("SSL_get_peer_certificate");
+ 	      return "SSL error: cannot get server certificate";
+ 	    }
+-	  X509_check_purpose(cert, -1, 0); /* Make sure hash is correct */
+-	  if (memcmp(cert->sha1_hash, stored_hash, SHA_DIGEST_LENGTH) != 0)
++	  if (memcmp(sha1_hash, stored_hash, SHA_DIGEST_LENGTH) != 0)
+ 	    {
+ 	      int x = sslui_check_cert(ssl);
+ 	      if(x < 0)return "Invalid server certificate";
+ 
+-	      if (set_server_cert_hash(hostname, cert->sha1_hash) < 0)
++	      if (set_server_cert_hash(hostname, sha1_hash) < 0)
+ 		perror("Could not save server certificate");
+ 	    }
+ 	}
+diff -urp nessus-core.org/nessusd/detached.c nessus-core/nessusd/detached.c
+--- nessus-core.org/nessusd/detached.c	2006-01-30 21:56:54.000000000 +0100
++++ nessus-core/nessusd/detached.c	2018-09-30 14:14:18.413008203 +0200
+@@ -408,7 +408,7 @@ detached_new_session(globals, target)
+  char * target;
+ {
+  char * fname = detached_fname(globals);
+- int f = open(fname, O_CREAT|O_WRONLY|O_TRUNC);
++ int f = open(fname, O_CREAT|O_WRONLY|O_TRUNC, S_IRUSR | S_IWUSR);
+  if(f >= 0)
+  {
+   write(f, target, strlen(target));
+diff -urp nessus-core.org/nessusd/nessusd.c nessus-core/nessusd/nessusd.c
+--- nessus-core.org/nessusd/nessusd.c	2006-10-16 19:55:54.000000000 +0200
++++ nessus-core/nessusd/nessusd.c	2018-09-30 14:14:46.743853052 +0200
+@@ -622,11 +622,7 @@ main_loop()
+ 
+       if (ssl_mt == NULL)
+ 	{
+-	  if (strcasecmp(ssl_ver, "SSLv2") == 0)
+-	    ssl_mt = SSLv2_server_method();
+-	  else if (strcasecmp(ssl_ver, "SSLv3") == 0)
+-	    ssl_mt = SSLv3_server_method();
+-	  else if (strcasecmp(ssl_ver, "SSLv23") == 0)
++	  if (strcasecmp(ssl_ver, "SSLv23") == 0)
+ 	    ssl_mt = SSLv23_server_method();
+ 	  else if (strcasecmp(ssl_ver, "TLSv1") == 0)
+ 	    ssl_mt = TLSv1_server_method();
